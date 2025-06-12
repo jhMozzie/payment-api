@@ -11,3 +11,10 @@ build/
 # Sistema
 .DS_Store
 *.log
+
+# Prisma
+prisma/dev.db
+prisma/migrations/
+
+# Docker
+docker-compose.override.yml
