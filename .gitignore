@@ -1,18 +1,13 @@
-# Node modules
+# Node
 node_modules/
-
-# Logs
-*.log
-npm-debug.log*
-
-# Build output
 dist/
-
-# Env files
-.env
-
-# System
-.DS_Store
+build/
 
 # Prisma
-prisma/.env
+.env
+.env.local
+.prisma/
+
+# Sistema
+.DS_Store
+*.log
