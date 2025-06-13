@@ -1,32 +1,94 @@
-### Create a new invoice
+### GET all invoices
+GET http://localhost:3000/api/invoices
+Content-Type: application/json
+
+###
+
+### GET invoice by ID
+GET http://localhost:3000/api/invoices/1
+Content-Type: application/json
+
+###
+
+### 1. Invoice con boleta y pago en efectivo
 POST http://localhost:3000/api/invoices
 Content-Type: application/json
 
 {
-  "customer_id": 8,
-  "collector_id": 3,
-  "issue_date": "2025-06-13T00:00:00.000Z",
-  "total": 150.75,
-  "comments": "Pago parcial por servicios",
+  "customer_id": 1,
+  "collector_id": 2,
+  "issue_date": "2025-06-13T10:00:00.000Z",
+  "total": 250.75,
+  "comments": "Compra de productos de limpieza",
+  "payment_method": "cash",
+  "payment_channel": "boleta",
+  "status": "paid"
+}
+
+###
+
+### 2. Invoice con factura y pago a crédito
+POST http://localhost:3000/api/invoices
+Content-Type: application/json
+
+{
+  "customer_id": 2,
+  "collector_id": 1,
+  "issue_date": "2025-06-12T14:30:00.000Z",
+  "total": 475.00,
+  "comments": "Factura corporativa",
   "payment_method": "credit",
   "payment_channel": "factura",
+  "status": "unpaid"
+}
+
+###
+
+### 3. Invoice con nota de venta parcialmente pagada
+POST http://localhost:3000/api/invoices
+Content-Type: application/json
+
+{
+  "customer_id": 1,
+  "collector_id": 1,
+  "issue_date": "2025-06-10T09:00:00.000Z",
+  "total": 330.00,
+  "comments": "Compra en tienda minorista",
+  "payment_method": "cash",
+  "payment_channel": "nota_venta",
   "status": "partial"
 }
 
-## Get all customers
-GET http://localhost:3000/api/invoices
+###
 
-### Get a customer by ID
-GET http://localhost:3000/api/invoices/1
-### Update an invoice
+### 4. Invoice con factura y pago en efectivo, sin comentarios
+POST http://localhost:3000/api/invoices
+Content-Type: application/json
+
+{
+  "customer_id": 2,
+  "collector_id": 2,
+  "issue_date": "2025-06-08T16:45:00.000Z",
+  "total": 150.00,
+  "payment_method": "cash",
+  "payment_channel": "factura",
+  "status": "paid"
+}
+
+###
+
+### UPDATE invoice
 PUT http://localhost:3000/api/invoices/1
 Content-Type: application/json
 
 {
-  "total": 200.00,
-  "comments": "Monto corregido",
-  "status": "paid"
+  "comments": "Actualizado con nuevo monto",
+  "total": 150.00,
+  "status": "partial"
 }
 
-### Delete Invoice
+###
+
+### DELETE invoice
 DELETE http://localhost:3000/api/invoices/1
+Content-Type: application/json

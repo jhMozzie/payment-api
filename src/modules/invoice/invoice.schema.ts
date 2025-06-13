@@ -5,7 +5,7 @@ export const createInvoiceSchema = z.object({
   collector_id: z.number().int(),
   issue_date: z.string().datetime({ message: "Invalid date format" }),
   total: z.number().min(0),
-  comments: z.string().optional(),
+  comments: z.string().default(""),
 
   payment_method: z.enum(["cash", "credit"]),
   payment_channel: z.enum(["boleta", "factura", "nota_venta"]),

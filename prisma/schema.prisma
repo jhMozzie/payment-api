@@ -8,20 +8,13 @@ datasource db {
 }
 
 model User {
-  id             Int        @id @default(autoincrement())
-  name           String
-  email          String     @unique
-  password_hash  String
-  role           UserRole
-  created_at     DateTime   @default(now())
-
-  collector      Collector?
-}
-
-enum UserRole {
-  admin
-  collector
-  viewer
+  id            Int        @id @default(autoincrement())
+  name          String
+  email         String     @unique
+  password_hash String
+  role          UserRole
+  created_at    DateTime   @default(now())
+  collector     Collector?
 }
 
 model Customer {
@@ -34,16 +27,27 @@ model Customer {
 }
 
 model Collector {
-  id        Int       @id @default(autoincrement())
-  firstname String
-  lastname  String
-  phone     String?    @unique
-  
-  user_id   Int?      @unique
-  user      User?     @relation(fields: [user_id], references: [id])
+  id           Int           @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  phone        String?       @unique
+  user_id      Int?          @unique
+  bankAccounts BankAccount[]
+  user         User?         @relation(fields: [user_id], references: [id])
+  invoices     Invoice[]
+  payments     Payment[]
+}
 
-  invoices  Invoice[]
-  payments  Payment[]
+model BankAccount {
+  id             Int       @id @default(autoincrement())
+  collector_id   Int
+  bank_name      String
+  account_number String
+  cci            String
+  is_primary     Boolean?  @default(false)
+  collector      Collector @relation(fields: [collector_id], references: [id])
+
+  @@index([collector_id])
 }
 
 model Invoice {
@@ -52,13 +56,31 @@ model Invoice {
   collector_id    Int
   issue_date      DateTime
   total           Decimal
-  comments        String
+  comments        String?
   payment_method  PaymentMethod
   payment_channel PaymentChannel
   status          InvoiceStatus
   collector       Collector      @relation(fields: [collector_id], references: [id])
   customer        Customer       @relation(fields: [customer_id], references: [id])
   payments        Payment[]
+}
+
+model Payment {
+  id              Int                   @id @default(autoincrement())
+  invoice_id      Int
+  collector_id    Int
+  payment_date    DateTime
+  amount          Decimal
+  notes           String
+  payment_channel PaymentChannelPayment
+  collector       Collector             @relation(fields: [collector_id], references: [id])
+  invoice         Invoice               @relation(fields: [invoice_id], references: [id])
+}
+
+enum UserRole {
+  admin
+  collector
+  viewer
 }
 
 enum PaymentMethod {
@@ -78,26 +100,13 @@ enum InvoiceStatus {
   paid
 }
 
-model Payment {
-  id              Int      @id @default(autoincrement())
-  invoice_id      Int
-  collector_id    Int
-  payment_date    DateTime
-  amount          Decimal
-  notes           String
-  payment_channel PaymentChannelPayment
-
-  invoice         Invoice   @relation(fields: [invoice_id], references: [id])
-  collector       Collector @relation(fields: [collector_id], references: [id])
-}
-
 enum PaymentChannelPayment {
   cash
   bcp
   bbva
   yape
   plin
+  undeclared
   interbank
   others
-  undeclared
 }

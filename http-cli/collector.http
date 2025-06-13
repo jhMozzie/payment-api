@@ -17,8 +17,8 @@ PUT http://localhost:3000/api/collectors/1
 Content-Type: application/json
 
 {
-  "firstname": "Carlita",
-  "lastname": "Mejia",
+  "firstname": "Carlos",
+  "lastname": "Pérez",
   "phone": "987654321"
 }
 
