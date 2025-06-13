@@ -1,0 +1,46 @@
+## Create a new Collector### 🟢 Get all collectors
+GET http://localhost:3000/api/collectors
+Content-Type: application/json
+
+
+### 🔍 Get collector by ID
+GET http://localhost:3000/api/collectors/1
+Content-Type: application/json
+
+
+### ➕ Create a new collector
+POST http://localhost:3000/api/collectors
+Content-Type: application/json
+
+{
+  "firstname": "María",
+  "lastname": "López",
+  "phone": "987654321"
+}
+
+
+### ➕ Create another collector
+POST http://localhost:3000/api/collectors
+Content-Type: application/json
+
+{
+  "firstname": "Carlos",
+  "lastname": "Ramírez",
+  "phone": "9123456789"
+}
+
+
+### ✏️ Update a collector
+PUT http://localhost:3000/api/collectors/1
+Content-Type: application/json
+
+{
+  "firstname": "María José",
+  "lastname": "López Gutiérrez",
+  "phone": "987654322"
+}
+
+
+### ❌ Delete a collector
+DELETE http://localhost:3000/api/collectors/2
+Content-Type: application/json

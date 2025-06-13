@@ -38,7 +38,11 @@ export class CustomerController {
 
   async delete(req: Request, res: Response) {
     const id = parseInt(req.params.id);
-    await service.delete(id);
+    const customer = await service.delete(id);
+    if (!customer) {
+      res.status(404).json({ message: "Customer Not found" });
+      return;
+    }
     res.status(204).send();
     return;
   }

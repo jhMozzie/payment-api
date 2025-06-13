@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import customerRouter from '@/modules/customer/customer.route';
+import collectorRouter from '@/modules/collector/collector.route';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/customers', customerRouter);
+app.use('/api/collectors', collectorRouter);
 
 // Root health check
 app.get('/', (_req, res) => {

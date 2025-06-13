@@ -3,23 +3,23 @@
 This project is a backend API built using Express, TypeScript, and Prisma ORM, with a PostgreSQL database, all managed via pnpm.
 
 
-# 📦 1. Initialize the project
+## 📦 1. Initialize the project
 ```bash
 pnpm init
 tsc --init
 ```
 
-# ⚙️ 2. Install main dependencies
+## ⚙️ 2. Install main dependencies
 ```bash
 pnpm add express dotenv cors morgan
 ```
 
-# 🧪 3. Install development dependencies
+## 🧪 3. Install development dependencies
 ```bash
 pnpm add -D typescript ts-node-dev @types/node @types/express @types/cors @types/morgan @types/dotenv
 ```
 
-# 🔧 4. TypeScript Configuration (tsconfig.json)
+## 🔧 4. TypeScript Configuration (tsconfig.json)
 ```json
 {
   "compilerOptions": {
@@ -39,14 +39,14 @@ pnpm add -D typescript ts-node-dev @types/node @types/express @types/cors @types
 }
 ```
 
-# 🔌 5. Install Prisma and initialize it
+## 🔌 5. Install Prisma and initialize it
 ```bash
 pnpm add prisma@6.8.0 @prisma/client@6.8.0
 pnpm approve-builds
 pnpx prisma init
 ```
 
-# 📜 6. Add useful scripts in package.json
+## 📜 6. Add useful scripts in package.json
 ```json
 "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
@@ -57,7 +57,7 @@ pnpx prisma init
     "prisma:studio": "prisma studio"
 }
 ``` 
-# 🗂️ Suggested project structure
+## 🗂️ Suggested project structure
 ```bash
 payment-api/
 ├── prisma/                # Prisma schema and migrations
@@ -72,7 +72,19 @@ payment-api/
 └── package.json
 ```
 
-# 📜 7. Create migrations
+## 📜 7. Create migrations
 ```bash
 pnpm prisma migrate dev --name init_customer
+```
+
+## Tips
+If you edit some datatable attributes you should use
+Only if you are not in prod.
+```bash
+pnpm prisma db push
+pnpm prisma generate
+```
+If you are in prod, use this
+```bash
+pnpm prisma migrate dev --name name_migration
 ```

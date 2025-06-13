@@ -3,19 +3,18 @@ POST http://localhost:3000/api/customers
 Content-Type: application/json
 
 {
-  "name": "Juan Pérez",
-  "tax_id": "123456789",
-  "address": "Av. Siempre Viva 123"
+  "name": "COMPAÑIA PRINSS E.I.R.L",
+  "tax_id": "20613088483",
+  "address": "AV. ALEJANDRO TIRADO NRO. 762 URB. SANTA BEATRIZ LIMA - LIMA - LIMA"
 }
-
 ### Create a new customer
 POST http://localhost:3000/api/customers
 Content-Type: application/json
 
 {
-  "name": "Jose Pérez",
-  "tax_id": "123456780",
-  "address": "Av. Siempre Viva 120"
+  "name": "W & M PRODUCTOS DE LIMPIEZA E.I.R.L",
+  "tax_id": "20554898158",
+  "address": "CAL.SANTA ROSA MZA. O LOTE. 25 URB. LAS FRESAS PROV. CONST. DEL CALLAO - PROV. CONST. DEL CALLAO - CALLAO"
 }
 
 ### Get all customers
@@ -41,4 +40,4 @@ Content-Type: application/json
 ###
 
 ### Delete a customer
-DELETE http://localhost:3000/api/customers/2
+DELETE http://localhost:3000/api/customers/7
