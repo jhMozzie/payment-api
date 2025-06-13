@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CustomerService } from "./customer.service";
+import { CustomerService } from "@/modules/customer/customer.service";
 
 const service = new CustomerService();
 

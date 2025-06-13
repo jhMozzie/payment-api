@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import customerRouter from './customer/customer.route';
+import customerRouter from '@/modules/customer/customer.route';
 
 dotenv.config();
 
