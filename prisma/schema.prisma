@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -15,16 +8,49 @@ datasource db {
 }
 
 model Customer {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
-  tax_id     String   @unique
+  tax_id     String    @unique
   address    String
-  created_at DateTime @default(now())
+  created_at DateTime  @default(now())
+  invoices   Invoice[]
 }
 
 model Collector {
-  id        Int    @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   firstname String
   lastname  String
-  phone     String @unique
+  phone     String    @unique
+  invoices  Invoice[]
+}
+
+model Invoice {
+  id              Int            @id @default(autoincrement())
+  customer_id     Int
+  collector_id    Int
+  issue_date      DateTime
+  total           Decimal
+  comments        String?
+  payment_method  PaymentMethod
+  payment_channel PaymentChannel
+  status          InvoiceStatus
+  collector       Collector      @relation(fields: [collector_id], references: [id])
+  customer        Customer       @relation(fields: [customer_id], references: [id])
+}
+
+enum PaymentMethod {
+  cash
+  credit
+}
+
+enum PaymentChannel {
+  boleta
+  factura
+  nota_venta
+}
+
+enum InvoiceStatus {
+  unpaid
+  partial
+  paid
 }
