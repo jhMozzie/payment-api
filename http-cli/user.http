@@ -1,0 +1,45 @@
+### Obtener todos los usuarios
+GET http://localhost:3000/api/users
+### Crear un admin
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "María González",
+  "email": "maria@example.com",
+  "password_hash": "123456",
+  "role": "admin"
+}
+### Crear un collector con teléfono
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Carlos Pérez",
+  "email": "carlos@example.com",
+  "password_hash": "654321",
+  "role": "collector",
+  "collector": {
+    "phone": "987654321"
+  }
+}
+### Crear un collector sin teléfono (usa valor por defecto o null)
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Luisa Salazar",
+  "email": "luisa@example.com",
+  "password_hash": "abcdef",
+  "role": "collector"
+}
+### Intentar crear usuario con email inválido
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Pedro Error",
+  "email": "esto-no-es-un-email",
+  "password_hash": "123123",
+  "role": "admin"
+}

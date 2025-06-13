@@ -7,6 +7,7 @@ import customerRouter from '@/modules/customer/customer.route';
 import collectorRouter from '@/modules/collector/collector.route';
 import invoiceRouter from '@/modules/invoice/invoice.route';
 import paymentRouter from '@/modules/payment/payment.route';
+import userRouter from '@/modules/user/user.route';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/api/customers', customerRouter);
 app.use('/api/collectors', collectorRouter);
 app.use('/api/invoices', invoiceRouter);
 app.use('/api/payments', paymentRouter);
+app.use('/api/users', userRouter);
 
 // Root health check
 app.get('/', (_req, res) => {
