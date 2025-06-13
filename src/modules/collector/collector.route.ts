@@ -2,7 +2,6 @@ import { Router } from "express";
 import { CollectorController } from "@/modules/collector/collector.controller";
 import { validate } from "@/middlewares/validate";
 import {
-    createCollectorSchema,
     updateCollectorSchema,
 } from "@/modules/collector/collector.schema";
 

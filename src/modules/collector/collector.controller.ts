@@ -21,11 +21,11 @@ export class CollectorController {
     return;
   }
 
-  async create(req: Request, res: Response) {
-    const collector = await service.create(req.body);
-    res.status(201).json(collector);
-    return;
-  }
+  // async create(req: Request, res: Response) {
+  //   const collector = await service.create(req.body);
+  //   res.status(201).json(collector);
+  //   return;
+  // }
 
   async update(req: Request, res: Response) {
     const id = parseInt(req.params.id);
