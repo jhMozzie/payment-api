@@ -22,6 +22,7 @@ model Collector {
   lastname  String
   phone     String    @unique
   invoices  Invoice[]
+  payments  Payment[]
 }
 
 model Invoice {
@@ -30,12 +31,13 @@ model Invoice {
   collector_id    Int
   issue_date      DateTime
   total           Decimal
-  comments        String?
+  comments        String
   payment_method  PaymentMethod
   payment_channel PaymentChannel
   status          InvoiceStatus
   collector       Collector      @relation(fields: [collector_id], references: [id])
   customer        Customer       @relation(fields: [customer_id], references: [id])
+  payments        Payment[]
 }
 
 enum PaymentMethod {
@@ -53,4 +55,28 @@ enum InvoiceStatus {
   unpaid
   partial
   paid
+}
+
+model Payment {
+  id              Int      @id @default(autoincrement())
+  invoice_id      Int
+  collector_id    Int
+  payment_date    DateTime
+  amount          Decimal
+  notes           String
+  payment_channel PaymentChannelPayment
+
+  invoice         Invoice   @relation(fields: [invoice_id], references: [id])
+  collector       Collector @relation(fields: [collector_id], references: [id])
+}
+
+enum PaymentChannelPayment {
+  cash
+  bcp
+  bbva
+  yape
+  plin
+  interbank
+  others
+  undeclared
 }

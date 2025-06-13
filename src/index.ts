@@ -6,6 +6,7 @@ import cors from 'cors';
 import customerRouter from '@/modules/customer/customer.route';
 import collectorRouter from '@/modules/collector/collector.route';
 import invoiceRouter from '@/modules/invoice/invoice.route';
+import paymentRouter from '@/modules/payment/payment.route';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api/customers', customerRouter);
 app.use('/api/collectors', collectorRouter);
 app.use('/api/invoices', invoiceRouter);
+app.use('/api/payments', paymentRouter);
 
 // Root health check
 app.get('/', (_req, res) => {

@@ -88,3 +88,11 @@ If you are in prod, use this
 ```bash
 pnpm prisma migrate dev --name name_migration
 ```
+
+## Use only in emergency
+```bash
+rm -rf node_modules
+rm -rf .prisma
+pnpm install
+pnpm prisma generate
+```

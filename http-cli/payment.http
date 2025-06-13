@@ -1,0 +1,39 @@
+### Create a new payment
+POST http://localhost:3000/api/payments
+Content-Type: application/json
+
+{
+  "invoice_id": 1,
+  "collector_id": 1,
+  "payment_date": "2025-06-13T00:00:00.000Z",
+  "amount": 200.50,
+  "notes": "First partial payment",
+  "payment_channel": "yape"
+}
+
+###
+
+### Get all payments
+GET http://localhost:3000/api/payments
+
+###
+
+### Get payment by ID
+GET http://localhost:3000/api/payments/1
+
+###
+
+### Update a payment
+PUT http://localhost:3000/api/payments/1
+Content-Type: application/json
+
+{
+  "amount": 200.55,
+  "notes": "Updated: payment received in cash",
+  "payment_channel": "cash"
+}
+
+###
+
+### Delete a payment
+DELETE http://localhost:3000/api/payments/1
