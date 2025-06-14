@@ -110,3 +110,11 @@ enum PaymentChannelPayment {
   interbank
   others
 }
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String
+  unit            String
+  active          Boolean  @default(true)
+  estimated_price Decimal?
+}

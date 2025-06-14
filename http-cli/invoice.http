@@ -70,7 +70,7 @@ Content-Type: application/json
   "collector_id": 2,
   "issue_date": "2025-06-08T16:45:00.000Z",
   "total": 150.00,
-  "payment_method": "cash",
+  "payment_method": "cash", 
   "payment_channel": "factura",
   "status": "paid"
 }

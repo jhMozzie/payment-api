@@ -1,0 +1,47 @@
+### Obtener todos los productos
+GET http://localhost:3000/api/products
+
+### Obtener producto por ID
+GET http://localhost:3000/api/products/1
+
+### Crear producto (completo)
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "name": "Detergente Multiuso",
+  "unit": "botella",
+  "estimated_price": 18.5,
+  "active": true
+}
+
+### Crear producto (solo campos obligatorios)
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "name": "Limpiador de vidrios",
+  "unit": "frasco"
+}
+
+### Editar producto (solo estimated_price)
+PUT http://localhost:3000/api/products/1
+Content-Type: application/json
+
+{
+  "estimated_price": 20.0
+}
+
+### Editar producto (todos los campos)
+PUT http://localhost:3000/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Desengrasante industrial",
+  "unit": "galón",
+  "estimated_price": 55.0,
+  "active": true
+}
+
+### Eliminar producto por ID
+DELETE http://localhost:3000/api/products/1
