@@ -8,7 +8,7 @@ export class ProductController {
   async getAll(req: Request, res: Response) {
     const products = await service.getAll()
     res.json(products)
-    return
+    return;
   }
 
   async getById(req: Request, res: Response) {
@@ -16,22 +16,22 @@ export class ProductController {
     const product = await service.getById(id)
     if (!product) {
       res.status(404).json({ message: "Product not found" })
-      return
+      return;
     }
     res.json(product)
-    return
+    return;
   }
 
   async create(req: Request, res: Response) {
     const parsed = createProductSchema.safeParse(req.body)
     if (!parsed.success) {
       res.status(400).json(parsed.error.format())
-      return
+      return;
     }
 
     const product = await service.create(parsed.data)
     res.status(201).json(product)
-    return
+    return;
   }
 
   async update(req: Request, res: Response) {
@@ -39,18 +39,18 @@ export class ProductController {
     const parsed = updateProductSchema.safeParse(req.body)
     if (!parsed.success) {
       res.status(400).json(parsed.error.format())
-      return
+      return;
     }
 
     const product = await service.update(id, parsed.data)
     res.json(product)
-    return
+    return;
   }
 
   async delete(req: Request, res: Response) {
     const id = parseInt(req.params.id)
     const product = await service.delete(id)
     res.status(204).send()
-    return
+    return;
   }
 }

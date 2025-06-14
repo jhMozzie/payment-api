@@ -1,0 +1,32 @@
+### 📄 Obtener todos los detalles de facturas
+GET http://localhost:3000/api/invoice-details
+
+### 🔍 Obtener detalle de factura por ID
+GET http://localhost:3000/api/invoice-details/1
+
+### ➕ Crear un nuevo detalle de factura
+POST http://localhost:3000/api/invoice-details
+Content-Type: application/json
+
+{
+  "invoice_id": 1,
+  "product_id": 1,
+  "product_name": "GLN VASELINA LÍQUIDA USP",
+  "unit": "GLN",
+  "quantity": 12,
+  "unit_price": 23.73,
+  "subtotal": 284.75,
+  "has_igv_included": true
+}
+
+### ✏️ Actualizar detalle de factura por ID
+PUT http://localhost:3000/api/invoice-details/1
+Content-Type: application/json
+
+{
+  "quantity": 15,
+  "subtotal": 355.95
+}
+
+### ❌ Eliminar detalle de factura por ID
+DELETE http://localhost:3000/api/invoice-details/1

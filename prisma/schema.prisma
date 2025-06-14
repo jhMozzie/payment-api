@@ -51,7 +51,7 @@ model BankAccount {
 }
 
 model Invoice {
-  id              Int            @id @default(autoincrement())
+  id              Int             @id @default(autoincrement())
   customer_id     Int
   collector_id    Int
   issue_date      DateTime
@@ -60,9 +60,10 @@ model Invoice {
   payment_method  PaymentMethod
   payment_channel PaymentChannel
   status          InvoiceStatus
-  collector       Collector      @relation(fields: [collector_id], references: [id])
-  customer        Customer       @relation(fields: [customer_id], references: [id])
+  collector       Collector       @relation(fields: [collector_id], references: [id])
+  customer        Customer        @relation(fields: [customer_id], references: [id])
   payments        Payment[]
+  details         InvoiceDetail[]
 }
 
 model Payment {
@@ -112,9 +113,28 @@ enum PaymentChannelPayment {
 }
 
 model Product {
-  id              Int      @id @default(autoincrement())
+  id              Int             @id @default(autoincrement())
   name            String
   unit            String
-  active          Boolean  @default(true)
+  active          Boolean         @default(true)
   estimated_price Decimal?
+  invoiceDetails  InvoiceDetail[] // 👈 relación uno a muchos
+}
+
+model InvoiceDetail {
+  id               Int     @id @default(autoincrement())
+  invoice_id       Int
+  product_id       Int
+  product_name     String
+  quantity         Decimal
+  unit             String
+  unit_price       Decimal
+  subtotal         Decimal
+  has_igv_included Boolean
+
+  invoice Invoice @relation(fields: [invoice_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@index([invoice_id])
+  @@index([product_id])
 }

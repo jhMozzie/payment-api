@@ -44,4 +44,4 @@ Content-Type: application/json
 }
 
 ### Eliminar producto por ID
-DELETE http://localhost:3000/api/products/1
+DELETE http://localhost:3000/api/products/2
