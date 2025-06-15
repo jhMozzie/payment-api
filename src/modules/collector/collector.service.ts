@@ -13,10 +13,6 @@ export class CollectorService {
     return prisma.collector.findUnique({ where: { id } });
   }
 
-  // create(data: CollectorCreateInput) {
-  //   return prisma.collector.create({ data });
-  // }
-
   update(id: number, data: CollectorUpdateInput) {
     return prisma.collector.update({ where: { id }, data });
   }
