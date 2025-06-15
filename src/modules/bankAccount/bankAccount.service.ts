@@ -2,7 +2,7 @@ import { prisma } from "@/config/prisma";
 import {
   BankAccountCreateInput,
   BankAccountUpdateInput,
-} from "./bankAccount.types";
+} from "@/modules/bankAccount/bankAccount.types";
 
 export class BankAccountService {
   getAll() {

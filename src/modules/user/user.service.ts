@@ -28,7 +28,7 @@ async create(data: UserCreateInput) {
             create: {
               firstname,
               lastname,
-              phone: collector?.phone ?? null, // puede ser null
+              phone: collector?.phone ?? ""
             },
           },
         },

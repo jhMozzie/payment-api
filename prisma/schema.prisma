@@ -42,8 +42,8 @@ model BankAccount {
   id             Int       @id @default(autoincrement())
   collector_id   Int
   bank_name      String
-  account_number String
-  cci            String
+  account_number String    @unique  
+  cci            String    @unique
   is_primary     Boolean?  @default(false)
   collector      Collector @relation(fields: [collector_id], references: [id])
 
@@ -60,23 +60,40 @@ model Invoice {
   payment_method  PaymentMethod
   payment_channel PaymentChannel
   status          InvoiceStatus
+
   collector       Collector       @relation(fields: [collector_id], references: [id])
   customer        Customer        @relation(fields: [customer_id], references: [id])
-  payments        Payment[]
   details         InvoiceDetail[]
+  cashMovements   CashMovement[]         // 1:N
+  invoicePayments InvoicePayment[]       // 👈 relación con tabla intermedia
 }
 
 model Payment {
   id              Int                   @id @default(autoincrement())
-  invoice_id      Int
   collector_id    Int
   payment_date    DateTime
   amount          Decimal
-  notes           String
+  notes           String?
   payment_channel PaymentChannelPayment
+
   collector       Collector             @relation(fields: [collector_id], references: [id])
-  invoice         Invoice               @relation(fields: [invoice_id], references: [id])
+
+  invoicePayments InvoicePayment[]      // 👈 nueva relación con tabla intermedia
 }
+
+model InvoicePayment {
+  id         Int     @id @default(autoincrement())
+  invoice_id Int
+  payment_id Int
+  amount     Decimal
+
+  invoice Invoice @relation(fields: [invoice_id], references: [id])
+  payment Payment @relation(fields: [payment_id], references: [id])
+
+  @@index([invoice_id])
+  @@index([payment_id])
+}
+
 
 enum UserRole {
   admin
@@ -90,9 +107,9 @@ enum PaymentMethod {
 }
 
 enum PaymentChannel {
-  boleta
-  factura
-  nota_venta
+  invoice
+  receipt
+  sale_note
 }
 
 enum InvoiceStatus {
@@ -130,6 +147,7 @@ model InvoiceDetail {
   unit             String
   unit_price       Decimal
   subtotal         Decimal
+  igv_amount       Decimal   @default(0.0)
   has_igv_included Boolean
 
   invoice Invoice @relation(fields: [invoice_id], references: [id])
@@ -137,4 +155,35 @@ model InvoiceDetail {
 
   @@index([invoice_id])
   @@index([product_id])
+}
+
+model CashMovement {
+  id              Int                @id @default(autoincrement())
+  invoice_id      Int?
+  source          CashMovementSource
+  movement_date   DateTime
+  amount          Decimal
+  channel         DeclaredChannel
+  description     String
+  delivery_method DeliveryMethod?
+  delivered_to    String?
+
+  invoice Invoice? @relation(fields: [invoice_id], references: [id])
+
+  @@index([invoice_id])
+}
+
+enum CashMovementSource {
+  payment
+  other
+}
+
+enum DeclaredChannel {
+  declared
+  undeclared
+}
+
+enum DeliveryMethod {
+  cash
+  bank_transfer
 }

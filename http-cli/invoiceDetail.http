@@ -4,20 +4,51 @@ GET http://localhost:3000/api/invoice-details
 ### 🔍 Obtener detalle de factura por ID
 GET http://localhost:3000/api/invoice-details/1
 
-### ➕ Crear un nuevo detalle de factura
+### ➕ Crear detalle de factura: Detergente Multiuso x6
 POST http://localhost:3000/api/invoice-details
 Content-Type: application/json
 
 {
   "invoice_id": 1,
   "product_id": 1,
-  "product_name": "GLN VASELINA LÍQUIDA USP",
-  "unit": "GLN",
-  "quantity": 12,
-  "unit_price": 23.73,
-  "subtotal": 284.75,
+  "product_name": "Detergente Multiuso",
+  "unit": "botella",
+  "quantity": 6,
+  "unit_price": 20.00,
+  "subtotal": 120.00,
   "has_igv_included": true
 }
+
+### ➕ Crear detalle de factura: VASELINA LÍQUIDA USP x3
+POST http://localhost:3000/api/invoice-details
+Content-Type: application/json
+
+{
+  "invoice_id": 1,
+  "product_id": 3,
+  "product_name": "GLN VASELINA LÍQUIDA USP",
+  "unit": "GLN",
+  "quantity": 3,
+  "unit_price": 23.73,
+  "subtotal": 71.19,
+  "has_igv_included": true
+}
+
+### ➕ Crear detalle de factura: BIDÓN DESINFECTANTE x2
+POST http://localhost:3000/api/invoice-details
+Content-Type: application/json
+
+{
+  "invoice_id": 1,
+  "product_id": 4,
+  "product_name": "BIDÓN DESINFECTANTE 5L",
+  "unit": "BIDÓN",
+  "quantity": 2,
+  "unit_price": 45.90,
+  "subtotal": 91.80,
+  "has_igv_included": true
+}
+
 
 ### ✏️ Actualizar detalle de factura por ID
 PUT http://localhost:3000/api/invoice-details/1

@@ -11,6 +11,17 @@ Content-Type: application/json
   "payment_channel": "yape"
 }
 
+### ➕ Crear nuevo pago sin notas
+POST http://localhost:3000/api/payments
+Content-Type: application/json
+
+{
+  "invoice_id": 2,
+  "collector_id": 1,
+  "payment_date": "2025-06-14T15:00:00Z",
+  "amount": 200.00,
+  "payment_channel": "yape"
+}
 ###
 
 ### Get all payments
@@ -36,4 +47,4 @@ Content-Type: application/json
 ###
 
 ### Delete a payment
-DELETE http://localhost:3000/api/payments/2
+DELETE http://localhost:3000/api/payments/3

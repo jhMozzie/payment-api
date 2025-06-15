@@ -8,7 +8,7 @@ export const createInvoiceSchema = z.object({
   comments: z.string().default(""),
 
   payment_method: z.enum(["cash", "credit"]),
-  payment_channel: z.enum(["boleta", "factura", "nota_venta"]),
+  payment_channel: z.enum(["receipt", "invoice", "sale_note"]), // <-- aquí el cambio
   status: z.enum(["unpaid", "partial", "paid"]),
 });
 

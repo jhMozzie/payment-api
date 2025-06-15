@@ -1,0 +1,114 @@
+### 🔍 Obtener todos los movimientos de caja
+GET http://localhost:3000/api/cash-movements
+Accept: application/json
+
+### 🔍 Obtener un movimiento de caja por ID
+GET http://localhost:3000/api/cash-movements/1
+Accept: application/json
+
+### ➕ Crear nuevo movimiento de caja (sin factura relacionada)
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "source": "other",
+  "movement_date": "2025-06-14T12:00:00Z",
+  "amount": 100.00,
+  "channel": "declared",
+  "description": "Ingreso de caja por evento",
+  "delivery_method": "cash",
+  "delivered_to": "Tesorería"
+}
+
+### ➕ Crear nuevo movimiento de caja relacionado a una factura
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "invoice_id": 1,
+  "source": "payment",
+  "movement_date": "2025-06-14T15:00:00Z",
+  "amount": 300.00,
+  "channel": "declared",
+  "description": "Pago parcial recibido de cliente",
+  "delivery_method": "bank_transfer",
+  "delivered_to": "Contabilidad"
+}
+
+### 📝 Actualizar movimiento de caja
+PUT http://localhost:3000/api/cash-movements/1
+Content-Type: application/json
+
+{
+  "description": "Modificado: ingreso desde evento externo",
+  "amount": 150.00
+}
+
+### ❌ Eliminar movimiento de caja
+DELETE http://localhost:3000/api/cash-movements/2
+
+### ➕ Movimiento sin `delivered_to` ni `delivery_method`
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "source": "other",
+  "movement_date": "2025-06-14T18:00:00Z",
+  "amount": 50.00,
+  "channel": "undeclared",
+  "description": "Efectivo recolectado sin entrega formal"
+}
+
+### ➕ Movimiento parcial de factura, sin `delivered_to`
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "invoice_id": 3,
+  "source": "payment",
+  "movement_date": "2025-06-15T10:30:00Z",
+  "amount": 200.00,
+  "channel": "declared",
+  "description": "Pago parcial en efectivo",
+  "delivery_method": "cash"
+}
+
+### ➕ Movimiento de caja sin relación con factura y con transferencia
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "source": "other",
+  "movement_date": "2025-06-16T09:00:00Z",
+  "amount": 1200.00,
+  "channel": "declared",
+  "description": "Transferencia externa recibida",
+  "delivery_method": "bank_transfer",
+  "delivered_to": "Caja central"
+}
+
+### ➕ Movimiento `undeclared` sin método de entrega
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "source": "payment",
+  "invoice_id": 5,
+  "movement_date": "2025-06-16T13:45:00Z",
+  "amount": 75.00,
+  "channel": "undeclared",
+  "description": "Pago informal recibido de cliente"
+}
+
+### ➕ Movimiento con `delivery_method` pero sin `delivered_to`
+POST http://localhost:3000/api/cash-movements
+Content-Type: application/json
+
+{
+  "source": "other",
+  "movement_date": "2025-06-17T14:30:00Z",
+  "amount": 300.00,
+  "channel": "declared",
+  "description": "Ingreso por ajuste de caja",
+  "delivery_method": "cash"
+}

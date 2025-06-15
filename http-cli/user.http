@@ -43,3 +43,13 @@ Content-Type: application/json
   "password_hash": "123123",
   "role": "admin"
 }
+
+### PUT - Intento inválido (debe ser rechazado por Zod)
+PUT http://localhost:3000/api/users/3
+Content-Type: application/json
+
+{
+  "collector": {
+    "phone": "999888777"
+  }
+}

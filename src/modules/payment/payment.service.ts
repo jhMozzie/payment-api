@@ -3,14 +3,14 @@ import { PaymentCreateInput, PaymentUpdateInput } from "@/modules/payment/paymen
 
 export class PaymentService {
   getAll() {
-    return prisma.payment.findMany();
+    return prisma.payment.findMany({ include: { collector: true, invoice: true } });
   }
 
   getById(id: number) {
     return prisma.payment.findUnique({ where: { id } });
   }
 
-  create(data: PaymentCreateInput) {
+  async create(data: PaymentCreateInput) {
     return prisma.payment.create({ data });
   }
 
